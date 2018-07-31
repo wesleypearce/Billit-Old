@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Bill from './Bill'
+import BillViewer from './BillViewer'
 import '../style.css'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Bill />
+        <BillViewer />
       </div>
     );
   }
