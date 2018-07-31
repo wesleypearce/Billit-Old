@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 class BillViewer extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         {/* Dropdown menu for bill sorting */}
 
         Due in <Select
