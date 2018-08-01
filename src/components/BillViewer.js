@@ -3,8 +3,17 @@ import Bill from './Bill'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  }
+})
+
 class BillViewer extends Component {
   render() {
+    const classes = this.props
+
     return (
       <div>
         {/* Dropdown menu for bill sorting */}
@@ -17,6 +26,7 @@ class BillViewer extends Component {
           <MenuItem value={3}>3 Weeks</MenuItem>
           <MenuItem value={4}>4 Weeks</MenuItem>
         </Select>
+
 
         {/* List of bills according to sort displayed here */}
         <Bill />

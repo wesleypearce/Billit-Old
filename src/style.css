@@ -1,3 +1,19 @@
 .bill {
-  margin: 0px 30px 0px 30px;
+  margin: 0px 30px 0px 0px;
+}
+
+.my-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.bill-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.bill-column {
+  margin: 0px 25px 0px 25px;
 }
