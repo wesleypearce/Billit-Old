@@ -6,13 +6,13 @@ class Bill extends Component {
       <div className="container">
         <div className="row">
           <div className="col-xs-2 bill">
-            05/31/18
+            {this.props.dueDate}
           </div>
           <div className="col-xs-4 bill">
-            Electric
+            {this.props.name}
           </div>
           <div className="col-xs-2 bill">
-            $100
+            {this.props.cost}
           </div>
           <div className="col-xs-2 bill">
             <a href="#">Edit</a>

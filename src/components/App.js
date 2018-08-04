@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import BillViewer from './BillViewer'
-import BillEditor from './BillEditor'
+import BillViewer from '../containers/BillViewer'
+import BillEditor from '../containers/BillEditor'
 import '../style.css'
 
 const styles = theme => ({

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Bill from './Bill'
+import { connect } from 'react-redux'
+import Bill from '../components/Bill'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 
@@ -13,6 +14,12 @@ const styles = theme => ({
 class BillViewer extends Component {
   render() {
     const classes = this.props
+
+    let billList = this.props.bills.map((bill) => {
+      return (
+        <Bill key={bill.name} name={bill.name} cost={bill.cost} dueDate={bill.dueDate} />
+      )
+    })
 
     return (
       <div>
@@ -29,10 +36,14 @@ class BillViewer extends Component {
 
 
         {/* List of bills according to sort displayed here */}
-        <Bill />
+        {billList}
       </div>
     )
   }
 }
 
-export default BillViewer
+const mapStateToProps = (state) => {
+  return { bills: state.bills}
+}
+
+export default connect(mapStateToProps)(BillViewer)
