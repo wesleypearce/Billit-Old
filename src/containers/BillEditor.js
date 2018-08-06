@@ -28,6 +28,7 @@ class BillEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      id: 0,
       name: '',
       cost: 0,
       dueDate: new Date()
@@ -38,7 +39,8 @@ class BillEditor extends Component {
   }
 
   handleClick() {
-    this.props.dispatch(createBill(this.state.name, this.state.cost, this.state.dueDate))
+    this.props.dispatch(createBill(this.state.id, this.state.name, this.state.cost, this.state.dueDate))
+    this.setState({ id: this.state.id + 1})
   }
 
   handleInputChange(event) {
@@ -52,6 +54,7 @@ class BillEditor extends Component {
 
   render() {
     const classes = this.props;
+    console.log(this.props)
 
     return (
       <div>

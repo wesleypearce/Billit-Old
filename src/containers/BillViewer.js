@@ -17,7 +17,7 @@ class BillViewer extends Component {
 
     let billList = this.props.bills.map((bill) => {
       return (
-        <Bill key={bill.name} name={bill.name} cost={bill.cost} dueDate={bill.dueDate} />
+        <Bill key={bill.id} id={bill.id} name={bill.name} cost={bill.cost} dueDate={bill.dueDate} />
       )
     })
 

@@ -1,7 +1,25 @@
 import React, { Component } from 'react'
+import Button from '@material-ui/core/Button'
+
+const styles = theme => ({
+  button: {
+    margin: theme.space.unit
+  }
+})
 
 class Bill extends Component {
+  constructor(props) {
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick() {
+    console.log(this.props)
+  }
   render() {
+    const classes = this.props;
+    console.log(this.props)
+
     return (
       <div className="container">
         <div className="row">
@@ -9,7 +27,7 @@ class Bill extends Component {
             {this.props.dueDate}
           </div>
           <div className="col-xs-4 bill">
-            {this.props.name}
+            {this.props.name.toUpperCase()}
           </div>
           <div className="col-xs-2 bill">
             {this.props.cost}
@@ -18,7 +36,9 @@ class Bill extends Component {
             <a href="#">Edit</a>
           </div>
           <div className="col-xs-2 bill">
-            <a href="#">Delete</a>
+          <Button variant="outlined" onClick={this.handleClick} className={classes.button} color="primary">
+            Delete
+          </Button>
           </div>
         </div>
       </div>

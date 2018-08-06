@@ -6,6 +6,7 @@ function bills(state = [], action) {
       return [
         ...state,
         {
+          id: action.id,
           name: action.name,
           cost: action.cost,
           dueDate: action.dueDate
