@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Bill from '../components/Bill'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
+import { deleteBill } from '../actions/actions'
 
 const styles = theme => ({
   container: {
@@ -12,12 +13,23 @@ const styles = theme => ({
 })
 
 class BillViewer extends Component {
+  constructor(props) {
+    super(props)
+
+    this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  // Function receives an ID from Bill component for deletion of Bill with matching ID from state.bills
+  handleDelete(id) {
+    this.props.dispatch(deleteBill(id))
+  }
+
   render() {
     const classes = this.props
 
     let billList = this.props.bills.map((bill) => {
       return (
-        <Bill key={bill.id} id={bill.id} name={bill.name} cost={bill.cost} dueDate={bill.dueDate} />
+        <Bill key={bill.id} id={bill.id} name={bill.name} cost={bill.cost} dueDate={bill.dueDate} handleDelete={this.handleDelete} />
       )
     })
 

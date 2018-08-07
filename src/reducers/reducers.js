@@ -12,6 +12,9 @@ function bills(state = [], action) {
           dueDate: action.dueDate
         }
       ]
+    case 'DELETE_BILL':
+      const id = action.id
+      return state.filter(bill => bill.id !== id)
     default:
       return state
   }

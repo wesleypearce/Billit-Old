@@ -14,11 +14,9 @@ class Bill extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick = () => {
-    this.props.handleDelete(this.props.id)
+  handleClick () {
+    console.log('jesus')
   }
-
-
 
   render() {
     const classes = this.props;
@@ -31,8 +29,7 @@ class Bill extends Component {
             {this.props.dueDate}
           </div>
           <div className="col-xs-4 bill">
-            {/* {this.props.name.toUpperCase()} */}
-            {this.props.name}
+            {this.props.name.toUpperCase()}
           </div>
           <div className="col-xs-2 bill">
             {this.props.cost}
