@@ -6,7 +6,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import createBill from '../actions/actions'
+import { createBill } from '../actions/actions'
 
 
 const styles = theme => ({
