@@ -15,13 +15,36 @@ function bills(state = [], action) {
     case 'DELETE_BILL':
       const id = action.id
       return state.filter(bill => bill.id !== id)
+    case 'EDIT_BILL':
+      state[action.bill.id] = {
+        id: action.bill.id,
+        name: action.bill.name,
+        cost: action.bill.cost,
+        dueDate: action.bill.dueDate
+      }
+      return [
+        ...state
+      ]
+    default:
+      return state
+  }
+}
+
+function billSelect(state = [{ billSelected: false }], action) {
+  switch(action.type) {
+    case 'SELECT_BILL':
+      return {
+        activeBill: action.bill,
+        billSelected: true
+      }
     default:
       return state
   }
 }
 
 const billit = combineReducers({
-  bills
+  bills,
+  billSelect
 })
 
 export default billit
