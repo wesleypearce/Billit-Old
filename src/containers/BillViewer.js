@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Bill from '../components/Bill'
+import Bill from './Bill'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import { deleteBill } from '../actions/actions'
+import { deleteBill, editBill } from '../actions/actions'
 
 const styles = theme => ({
   container: {
@@ -17,6 +17,7 @@ class BillViewer extends Component {
     super(props)
 
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
   }
 
   // Function receives an ID from Bill component for deletion of Bill with matching ID from state.bills
@@ -24,12 +25,24 @@ class BillViewer extends Component {
     this.props.dispatch(deleteBill(id))
   }
 
+  handleEdit(bill) {
+    this.props.dispatch(editBill(bill))
+  }
+
   render() {
     const classes = this.props
 
     let billList = this.props.bills.map((bill) => {
       return (
-        <Bill key={bill.id} id={bill.id} name={bill.name} cost={bill.cost} dueDate={bill.dueDate} handleDelete={this.handleDelete} />
+        <Bill key={bill.id}
+        bill={bill}
+        id={bill.id}
+        name={bill.name}
+        cost={bill.cost}
+        dueDate={bill.dueDate}
+        handleDelete={this.handleDelete}
+        handleEdit={this.handleEdit}
+        />
       )
     })
 
