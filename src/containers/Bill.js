@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
@@ -145,4 +146,10 @@ handleInputChange(event) {
   }
 }
 
-export default Bill
+const mapStateToProps = (state) => {
+  return {
+    bills: state.bills
+  }
+}
+
+export default connect(mapStateToProps)(Bill)

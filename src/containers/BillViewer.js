@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Bill from '../components/Bill'
+import Bill from './Bill'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import { deleteBill, editBill } from '../actions/actions'
