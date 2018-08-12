@@ -7,20 +7,3 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
-
-.bill-container {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-}
-
-.bill-column {
-  margin: 0px 25px 0px 25px;
-}
-
-.bills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: baseline;
-}

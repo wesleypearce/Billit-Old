@@ -1,28 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Input from '@material-ui/core/Input'
-import FormControl from '@material-ui/core/FormControl'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { createBill } from '../actions/actions'
-
-
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-  button: {
-    margin: theme.space.unit
-  }
-});
 
 class BillEditor extends Component {
   constructor(props) {
@@ -31,18 +11,20 @@ class BillEditor extends Component {
       id: 0,
       name: '',
       cost: 0,
-      dueDate: new Date()
+      dueDate: new Date() // TODO: if this is going to be initial state, new Date() is incorrectly formatted
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
+  // On submit of new bill form, a new bill is created and stored in the redux store
   handleClick() {
     this.props.dispatch(createBill(this.state.id, this.state.name, this.state.cost, this.state.dueDate))
     this.setState({ id: this.state.id + 1})
   }
 
+  // Handle input change depending on name property of form field
   handleInputChange(event) {
     const target = event.target
     const name = target.name
@@ -55,95 +37,46 @@ class BillEditor extends Component {
   render() {
     const classes = this.props;
 
-    if(!this.props.billSelected) {
-      return (
-        <div>
-        <h3>Create a Bill</h3>
-        <form className={classes.container} noValidate>
-          <TextField
-            id="name"
-            label="Name"
-            type="text"
-            name="name"
-            defaultValue=""
-            onChange={this.handleInputChange}
-            className={classes.textField}
-          /><br />
-          <TextField
-            id="cost"
-            label="Cost"
-            type="number"
-            name="cost"
-            defaultValue=""
-            onChange={this.handleInputChange}
-            className={classes.textField}
-          /><br />
-          <TextField
-            id="date"
-            label="Due Date"
-            type="date"
-            name="dueDate"
-            defaultValue=""
-            onChange={this.handleInputChange}
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </form>
-        <Button variant="outlined" onClick={this.handleClick} className={classes.button} color="primary">
-          Submit
-        </Button>
-        </div>
-      )
-    } else {
-      console.log('second return')
-      return (
-        <div>
-        <h3>Create a Bill</h3>
-        <form className={classes.container} noValidate>
-          <TextField
-            id="name"
-            label="Name"
-            type="text"
-            name="name"
-            value="hello billy"
-            onChange={this.handleInputChange}
-            className={classes.textField}
-          /><br />
-          <TextField
-            id="cost"
-            label="Cost"
-            type="number"
-            name="cost"
-            defaultValue=""
-            onChange={this.handleInputChange}
-            className={classes.textField}
-          /><br />
-          <TextField
-            id="date"
-            label="Due Date"
-            type="date"
-            name="dueDate"
-            defaultValue=""
-            onChange={this.handleInputChange}
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </form>
-        <Button variant="outlined" onClick={this.handleClick} className={classes.button} color="primary">
-          Submit
-        </Button>
-        </div>
-      )
-
-    }
-
-
-    // TODO: clean this file up. Figure out why conditional rendering is not working or use a modal for bill edit
-
+    return (
+      <div>
+      <h3>Create a Bill</h3>
+      <form className={classes.container} noValidate>
+        <TextField
+          id="name"
+          label="Name"
+          type="text"
+          name="name"
+          defaultValue=""
+          onChange={this.handleInputChange}
+          className={classes.textField}
+        /><br />
+        <TextField
+          id="cost"
+          label="Cost"
+          type="number"
+          name="cost"
+          defaultValue=""
+          onChange={this.handleInputChange}
+          className={classes.textField}
+        /><br />
+        <TextField
+          id="date"
+          label="Due Date"
+          type="date"
+          name="dueDate"
+          defaultValue=""
+          onChange={this.handleInputChange}
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </form>
+      <Button variant="outlined" onClick={this.handleClick} className={classes.button} color="primary">
+        Submit
+      </Button>
+      </div>
+    )
   }
 }
 

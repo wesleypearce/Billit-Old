@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Bill from './Bill'
+import Bill from '../components/Bill'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import { deleteBill, editBill } from '../actions/actions'
-
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  }
-})
 
 class BillViewer extends Component {
   constructor(props) {
@@ -25,17 +18,16 @@ class BillViewer extends Component {
     this.props.dispatch(deleteBill(id))
   }
 
+  // TODO: edit was not working and needs to be redone. May need to reconsider app heirarchy
   handleEdit(bill) {
     this.props.dispatch(editBill(bill))
   }
 
   render() {
-    const classes = this.props
-
+    // Take all bills existing in redux state and display each as a Bill component
     let billList = this.props.bills.map((bill) => {
       return (
         <Bill key={bill.id}
-        bill={bill}
         id={bill.id}
         name={bill.name}
         cost={bill.cost}

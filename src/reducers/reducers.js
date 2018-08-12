@@ -16,11 +16,12 @@ function bills(state = [], action) {
       const id = action.id
       return state.filter(bill => bill.id !== id)
     case 'EDIT_BILL':
-      state[action.bill.id] = {
-        id: action.bill.id,
-        name: action.bill.name,
-        cost: action.bill.cost,
-        dueDate: action.bill.dueDate
+      const bill = action.bill
+      state[bill.id] = {
+        id: bill.id,
+        name: bill.name,
+        cost: bill.cost,
+        dueDate: bill.dueDate
       }
       return [
         ...state
@@ -30,6 +31,7 @@ function bills(state = [], action) {
   }
 }
 
+// May not need this. Depends on how I editting a bill will be worked out
 function billSelect(state = [{ billSelected: false }], action) {
   switch(action.type) {
     case 'SELECT_BILL':
