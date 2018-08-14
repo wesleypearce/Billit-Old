@@ -4,6 +4,10 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { createBill } from '../actions/actions'
 
+const billEditorStyle = {
+  backgroundColor: 'white'
+}
+
 class BillEditor extends Component {
   constructor(props) {
     super(props)
@@ -38,7 +42,7 @@ class BillEditor extends Component {
     const classes = this.props;
 
     return (
-      <div>
+      <div style={billEditorStyle}>
       <h3>Create a Bill</h3>
       <form className={classes.container} noValidate>
         <TextField
