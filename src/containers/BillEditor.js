@@ -11,7 +11,7 @@ class BillEditor extends Component {
       id: 0,
       name: '',
       cost: 0,
-      dueDate: new Date() // TODO: if this is going to be initial state, new Date() is incorrectly formatted
+      dueDate: new Date()
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
