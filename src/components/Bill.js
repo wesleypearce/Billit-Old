@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
 
+const billNameDateStyle = {
+  width: '100px',
+  marginRight: '30px'
+}
+
+
+const billCostButtonStyle = {
+  width: '50px',
+  marginRight: '30px'
+
+}
+
 class Bill extends Component {
   constructor(props) {
     super(props)
@@ -46,16 +58,16 @@ handleInputChange(event) {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-xs-2 bill">
+          <div style={billNameDateStyle} className="col-xs-2">
             {dateFormat}
           </div>
-          <div className="col-xs-4 bill">
+          <div style={billNameDateStyle} className="col-xs-4">
             {this.props.name}
           </div>
-          <div className="col-xs-2 bill">
-            {this.props.cost}
+          <div style={billCostButtonStyle} className="col-xs-2">
+            ${this.props.cost}
           </div>
-          <div className="col-xs-2 bill">
+          <div style={billCostButtonStyle} className="col-xs-2">
           <Button
             variant="outlined"
             className={classes.button}
@@ -65,7 +77,7 @@ handleInputChange(event) {
               Edit
           </Button>
           </div>
-          <div className="col-xs-2 bill">
+          <div style={billCostButtonStyle} className="col-xs-2">
           <Button variant="outlined" onClick={this.handleClick} id="delete" className={classes.button} color="secondary">
             Delete
           </Button>

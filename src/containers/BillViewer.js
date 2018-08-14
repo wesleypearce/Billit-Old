@@ -5,6 +5,14 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import { deleteBill, editBill } from '../actions/actions'
 
+const billsToTest = [
+  { id: 0, name: 'Internet', cost: 50, dueDate: '2018-08-23' },
+  { id: 1, name: 'Phone', cost: 35, dueDate: '2018-08-28' },
+  { id: 2, name: 'Rent', cost: 1230, dueDate: '2018-09-05' },
+  { id: 3, name: 'Beer', cost: 20, dueDate: '2018-08-30' },
+  { id: 4, name: 'Savings', cost: 200, dueDate: '2018-09-10' }
+]
+
 class BillViewer extends Component {
   constructor(props) {
     super(props)
@@ -41,7 +49,7 @@ class BillViewer extends Component {
       return 0
     }
 
-    let billList = this.props.bills.sort(compare).map((bill) => {
+    let billList = billsToTest.sort(compare).map((bill) => {
       return (
         <Bill key={bill.id}
         id={bill.id}
@@ -58,7 +66,7 @@ class BillViewer extends Component {
       <div>
         {/* Dropdown menu for bill sorting */}
 
-        Due in <Select
+        Due <Select
           value={this.state.weekFilter}
           onChange={this.handleChange}
         >
@@ -69,6 +77,8 @@ class BillViewer extends Component {
           <MenuItem value={4}>in 4 Weeks</MenuItem>
         </Select>
 
+        {/* Test Bill */}
+        <Bill id={0} name={'Internet'} cost={30} dueDate={'2018-08-23'} />
 
         {/* List of bills according to sort displayed here */}
         {billList}
