@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import BillViewer from '../containers/BillViewer'
 import BillEditor from '../containers/BillEditor'
-import Test from './Test'
 import '../style.css'
 
 const jumbotronStyle = {
@@ -26,7 +25,6 @@ class App extends Component {
           <BillEditor />
           <BillViewer />
         </div>
-        <Test />
       </div>
     )
   }
