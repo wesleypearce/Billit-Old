@@ -34,8 +34,14 @@ class BillViewer extends Component {
   }
 
   render() {
-    // Take all bills existing in redux state and display each as a Bill component
-    let billList = this.props.bills.map((bill) => {
+    // Compare dueDates, sort in increasing order, then display each as a Bill component
+    const compare = (a, b) => {
+      if(a.dueDate < b.dueDate) return -1
+      if(a.dueDate > b.dueDate) return 1
+      return 0
+    }
+
+    let billList = this.props.bills.sort(compare).map((bill) => {
       return (
         <Bill key={bill.id}
         id={bill.id}
