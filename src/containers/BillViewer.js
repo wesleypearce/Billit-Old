@@ -8,11 +8,21 @@ import { deleteBill, editBill } from '../actions/actions'
 class BillViewer extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      weekFilter: 0
+    }
 
     this.handleDelete = this.handleDelete.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
+  // Handle change in week filter
+  handleChange(event) {
+    this.setState({
+      weekFilter: event.target.value
+    })
+  }
   // Function receives an ID from Bill component for deletion of Bill with matching ID from state.bills
   handleDelete(id) {
     this.props.dispatch(deleteBill(id))
@@ -24,8 +34,14 @@ class BillViewer extends Component {
   }
 
   render() {
-    // Take all bills existing in redux state and display each as a Bill component
-    let billList = this.props.bills.map((bill) => {
+    // Compare dueDates, sort in increasing order, then display each as a Bill component
+    const compare = (a, b) => {
+      if(a.dueDate < b.dueDate) return -1
+      if(a.dueDate > b.dueDate) return 1
+      return 0
+    }
+
+    let billList = this.props.bills.sort(compare).map((bill) => {
       return (
         <Bill key={bill.id}
         id={bill.id}
@@ -43,12 +59,14 @@ class BillViewer extends Component {
         {/* Dropdown menu for bill sorting */}
 
         Due in <Select
-          value={1}
+          value={this.state.weekFilter}
+          onChange={this.handleChange}
         >
-          <MenuItem value={1}>1 Week</MenuItem>
-          <MenuItem value={2}>2 Weeks</MenuItem>
-          <MenuItem value={3}>3 Weeks</MenuItem>
-          <MenuItem value={4}>4 Weeks</MenuItem>
+          <MenuItem value={0}>Anytime</MenuItem>
+          <MenuItem value={1}>in 1 Week</MenuItem>
+          <MenuItem value={2}>in 2 Weeks</MenuItem>
+          <MenuItem value={3}>in 3 Weeks</MenuItem>
+          <MenuItem value={4}>in 4 Weeks</MenuItem>
         </Select>
 
 

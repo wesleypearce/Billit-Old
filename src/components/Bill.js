@@ -36,11 +36,18 @@ handleInputChange(event) {
   render() {
     const classes = this.props;
 
+    // Format dueDate string to (Day of Week)(Month)(Date)
+    const offset = 86400000 // Time zone offset in ms
+    const date = new Date(Date.parse(this.props.dueDate) + offset)
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const dateFormat = days[date.getDay()] + ' ' + months[date.getMonth()] + ' ' + date.getDate()
+
     return (
       <div className="container">
         <div className="row">
           <div className="col-xs-2 bill">
-            {this.props.dueDate}
+            {dateFormat}
           </div>
           <div className="col-xs-4 bill">
             {this.props.name}
