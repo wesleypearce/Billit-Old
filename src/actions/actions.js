@@ -13,3 +13,7 @@ export function selectBill(bill) {
 export function editBill(bill) {
   return { type: 'EDIT_BILL', bill }
 }
+
+export function filterBills(weekFilter) {
+  return { type: 'FTILER_BILLS', weekFilter}
+}
