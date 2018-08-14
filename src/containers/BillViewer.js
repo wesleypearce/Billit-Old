@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Bill from '../components/Bill'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import { deleteBill, editBill } from '../actions/actions'
+import { deleteBill, editBill, filterBills } from '../actions/actions'
 
 const billsToTest = [
   { id: 0, name: 'Internet', cost: 50, dueDate: '2018-08-23' },
@@ -25,11 +25,9 @@ class BillViewer extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  // Handle change in week filter
+  // Handle change in week filter. Dispatch FILTER_BILLS
   handleChange(event) {
-    this.setState({
-      weekFilter: event.target.value
-    })
+    this.props.dispatch(filterBills(event.target.value))
   }
   // Function receives an ID from Bill component for deletion of Bill with matching ID from state.bills
   handleDelete(id) {
@@ -49,7 +47,7 @@ class BillViewer extends Component {
       return 0
     }
 
-    let billList = billsToTest.sort(compare).map((bill) => {
+    let billList = this.props.bills.sort(compare).map((bill) => {
       return (
         <Bill key={bill.id}
         id={bill.id}
@@ -76,9 +74,6 @@ class BillViewer extends Component {
           <MenuItem value={3}>in 3 Weeks</MenuItem>
           <MenuItem value={4}>in 4 Weeks</MenuItem>
         </Select>
-
-        {/* Test Bill */}
-        <Bill id={0} name={'Internet'} cost={30} dueDate={'2018-08-23'} />
 
         {/* List of bills according to sort displayed here */}
         {billList}

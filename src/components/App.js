@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BillViewer from '../containers/BillViewer'
 import BillEditor from '../containers/BillEditor'
+import Test from './Test'
 import '../style.css'
 
 const jumbotronStyle = {
@@ -18,13 +19,14 @@ class App extends Component {
         <div style={jumbotronStyle} className="jumbotron">
           <h1>Billit!</h1>
           <p>
-            A quick, effective way to stay up to speed with your upcoming bills.
+            A quick, effective way to track your upcoming bills
           </p>
         </div>
         <div className="my-container">
           <BillEditor />
           <BillViewer />
         </div>
+        <Test />
       </div>
     )
   }

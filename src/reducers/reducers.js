@@ -9,7 +9,8 @@ function bills(state = [], action) {
           id: action.id,
           name: action.name,
           cost: action.cost,
-          dueDate: action.dueDate
+          dueDate: action.dueDate,
+          dueDateInMs: Date.parse(action.dueDate)
         }
       ]
     case 'DELETE_BILL':
@@ -26,6 +27,12 @@ function bills(state = [], action) {
       return [
         ...state
       ]
+    case 'FILTER_BILLS':
+      const startDate = Date.parse(new Date())
+      const weekOffsetInMs = 604800000
+      const weekFilter = action.weekFilter
+
+      return state.filter(bill => bill.dueDateInMs >= startDate && bill.dueDateInMs <= weekFilter * weekOffsetInMs + startDate)
     default:
       return state
   }
