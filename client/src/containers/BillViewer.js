@@ -3,15 +3,7 @@ import { connect } from 'react-redux'
 import Bill from '../components/Bill'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import { deleteBill, editBill, filterBills } from '../actions/actions'
-
-const billsToTest = [
-  { id: 0, name: 'Internet', cost: 50, dueDate: '2018-08-23' },
-  { id: 1, name: 'Phone', cost: 35, dueDate: '2018-08-28' },
-  { id: 2, name: 'Rent', cost: 1230, dueDate: '2018-09-05' },
-  { id: 3, name: 'Beer', cost: 20, dueDate: '2018-08-30' },
-  { id: 4, name: 'Savings', cost: 200, dueDate: '2018-09-10' }
-]
+import { deleteBill, editBill, filterBills, getBills } from '../actions/actions'
 
 class BillViewer extends Component {
   constructor(props) {
@@ -20,9 +12,12 @@ class BillViewer extends Component {
       weekFilter: 0
     }
 
-    this.handleDelete = this.handleDelete.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.getBills()
   }
 
   // Handle change in week filter. Dispatch FILTER_BILLS
@@ -33,9 +28,7 @@ class BillViewer extends Component {
     this.props.dispatch(filterBills(event.target.value))
   }
   // Function receives an ID from Bill component for deletion of Bill with matching ID from state.bills
-  handleDelete(id) {
-    this.props.dispatch(deleteBill(id))
-  }
+  handleDelete = id => this.props.deleteBill(id)
 
   // TODO: edit was not working and needs to be redone. May need to reconsider app heirarchy
   handleEdit(bill) {
@@ -50,18 +43,21 @@ class BillViewer extends Component {
       return 0
     }
 
-    let billList = this.props.bills.sort(compare).map((bill) => {
-      return (
-        <Bill key={bill.id}
-        id={bill.id}
-        name={bill.name}
-        cost={bill.cost}
-        dueDate={bill.dueDate}
-        handleDelete={this.handleDelete}
-        handleEdit={this.handleEdit}
-        />
-      )
-    })
+    console.log(this.props.bills)
+    // let billList = this.props.bills.sort(compare).map((bill) => {
+    //   return (
+    //     <Bill key={bill.id}
+    //     id={bill.id}
+    //     name={bill.name}
+    //     cost={bill.cost}
+    //     dueDate={bill.dueDate}
+    //     handleDelete={this.handleDelete}
+    //     handleEdit={this.handleEdit}
+    //     />
+    //   )
+    // })
+    const { bills } = this.props.bills
+    console.log(bills)
 
     return (
       <div>
@@ -79,7 +75,12 @@ class BillViewer extends Component {
         </Select>
 
         {/* List of bills according to sort displayed here */}
-        {billList}
+        {/*{billList}*/}
+        <ul>
+          {bills.map((bill) => {
+            return <li key={bill._id}>{bill.name} <button onClick={this.handleDelete.bind(this, bill._id)}>Delete</button></li>
+          })}
+        </ul>
       </div>
     )
   }
@@ -89,4 +90,4 @@ const mapStateToProps = (state) => {
   return { bills: state.bills}
 }
 
-export default connect(mapStateToProps)(BillViewer)
+export default connect(mapStateToProps, { getBills, deleteBill })(BillViewer)

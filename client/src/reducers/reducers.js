@@ -1,26 +1,33 @@
 import { combineReducers } from 'redux'
 
-function bills(state = [], action) {
+const initialState = {
+  bills: [],
+  loading: false
+}
+
+function bills(state = initialState, action) {
   switch (action.type) {
     case 'CREATE_BILL':
-      return [
+      return {
         ...state,
-        action.payload
-      ]
+        bills: [action.payload, ...state.bills]
+      }
+    case 'GET_BILLS':
+      return {
+        ...state,
+        bills: action.payload,
+        loading: false
+      }
     case 'DELETE_BILL':
-      const id = action.id
-      return state.filter(bill => bill.id !== id)
-    // case 'EDIT_BILL':
-    //   const bill = action.bill
-    //   state[bill.id] = {
-    //     id: bill.id,
-    //     name: bill.name,
-    //     cost: bill.cost,
-    //     dueDate: bill.dueDate
-    //   }
-    //   return [
-    //     ...state
-    //   ]
+      return {
+        ...state,
+        bills: state.bills.filter(bill => bill._id !== action.payload)
+      }
+    case 'ITEMS_LOADING':
+      return {
+        ...state,
+        loading: true
+      }
     case 'FILTER_BILLS':
       const startDate = new Date().getTime()
       const weekOffsetInMs = 604800000

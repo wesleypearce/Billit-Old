@@ -1,7 +1,12 @@
 import axios from 'axios'
 
-export function deleteBill(id) {
-  return { type: 'DELETE_BILL', id }
+export const deleteBill = id => dispatch => {
+  axios.delete(`/api/bills/${id}`).then(res =>
+    dispatch({
+      type: 'DELETE_BILL',
+      payload: id
+    })
+  )
 }
 
 export function selectBill(bill) {
@@ -20,6 +25,15 @@ export const createBill = bill => dispatch => {
   axios.post('/api/bills', bill).then(res =>
     dispatch({
       type: 'CREATE_BILL',
+      payload: res.data
+    })
+  )
+}
+
+export const getBills = () => dispatch => {
+  axios.get('/api/bills').then(res => 
+    dispatch({
+      type: 'GET_BILLS',
       payload: res.data
     })
   )
