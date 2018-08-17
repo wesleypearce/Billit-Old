@@ -10,7 +10,7 @@ const Bill = require('../../models/Bill')
 // @access  Public
 router.get('/', (req, res) => {
   Bill.find()
-    .sort({ date: 1 })
+    .sort({ dueDate: 1 })
     .then(bills => res.json(bills))
 })
 
@@ -28,7 +28,8 @@ router.delete('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const newBill = new Bill({
     name: req.body.name,
-    cost: req.body.cost
+    cost: req.body.cost,
+    dueDate: req.body.dueDate
   })
   
   newBill.save().then(bill => res.json(bill))

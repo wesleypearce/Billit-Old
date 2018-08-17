@@ -12,7 +12,7 @@ class BillEditor extends Component {
   state = {
     name: '',
     cost: 0,
-    dueDate: new Date()
+    dueDate: ''
   }
 
   // On submit of new bill form, a new bill is created and stored in the redux store
