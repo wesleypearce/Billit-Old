@@ -5,13 +5,7 @@ function bills(state = [], action) {
     case 'CREATE_BILL':
       return [
         ...state,
-        {
-          id: action.id,
-          name: action.name,
-          cost: action.cost,
-          dueDate: action.dueDate,
-          dueDateInMs: Date.parse(action.dueDate)
-        }
+        action.payload
       ]
     case 'DELETE_BILL':
       const id = action.id
@@ -62,9 +56,9 @@ function billSelect(state = [{ billSelected: false }], action) {
   }
 }
 
-const billit = combineReducers({
+const rootReducer = combineReducers({
   bills,
   billSelect
 })
 
-export default billit
+export default rootReducer

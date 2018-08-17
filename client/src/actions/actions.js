@@ -1,6 +1,4 @@
-export function createBill(id, name, cost, dueDate) {
-  return { type: 'CREATE_BILL', id, name, cost, dueDate }
-}
+import axios from 'axios'
 
 export function deleteBill(id) {
   return { type: 'DELETE_BILL', id }
@@ -16,4 +14,13 @@ export function editBill(bill) {
 
 export function filterBills(weekFilter) {
   return { type: 'FILTER_BILLS', weekFilter}
+}
+
+export const createBill = bill => dispatch => {
+  axios.post('/api/bills', bill).then(res =>
+    dispatch({
+      type: 'CREATE_BILL',
+      payload: res.data
+    })
+  )
 }

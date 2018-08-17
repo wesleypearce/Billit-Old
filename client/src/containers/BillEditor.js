@@ -9,32 +9,21 @@ const billEditorStyle = {
 }
 
 class BillEditor extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      id: 0,
-      name: '',
-      cost: 0,
-      dueDate: new Date()
-    }
-
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+  state = {
+    name: '',
+    cost: 0,
+    dueDate: new Date()
   }
 
   // On submit of new bill form, a new bill is created and stored in the redux store
-  handleClick() {
-    this.props.dispatch(createBill(this.state.id, this.state.name, this.state.cost, this.state.dueDate))
-    this.setState({ id: this.state.id + 1})
+  handleClick = () => {
+    this.props.createBill(this.state)
   }
 
   // Handle input change depending on name property of form field
-  handleInputChange(event) {
-    const target = event.target
-    const name = target.name
-
+  handleInputChange = event => {
     this.setState({
-      [name]: target.value
+      [event.target.name]: event.target.value
     })
   }
 
@@ -91,4 +80,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(BillEditor)
+export default connect(mapStateToProps, { createBill })(BillEditor)
