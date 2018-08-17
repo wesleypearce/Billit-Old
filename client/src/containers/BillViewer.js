@@ -19,17 +19,13 @@ const styles = theme => ({
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
-  },
-  nested: {
-    paddingLeft: theme.spacing.unit * 4
   }
 })
 
 class BillViewer extends Component {
 
   state = {
-    weekFilter: 0,
-    open: true
+    weekFilter: 0
   }
 
   componentDidMount() {
@@ -47,7 +43,7 @@ class BillViewer extends Component {
   handleDelete = id => this.props.deleteBill(id)
 
   handleClick = () => {
-    this.setState({ open: !this.state.open})
+    console.log('clicked')
   }
 
   render() {
@@ -59,10 +55,10 @@ class BillViewer extends Component {
     // }
 
     const { bills } = this.props.bills
-    console.log(this.props)
+    const { classes } = this.props
 
     return (
-      <div className={styles.root}>
+      <div className={classes.root}>
         {/* Dropdown menu for bill sorting */}
 
         Due <Select
@@ -90,26 +86,12 @@ class BillViewer extends Component {
             const billInfoString = '$' + bill.cost + ' ' + bill.name
 
             return (
-              <div>
               <ListItem 
                 button
                 onClick={this.handleClick}
                 key={bill._id}>
                 <ListItemText primary={billInfoString}  secondary={dateFormat} />
-                {this.state.open ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
-              <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItem button className={styles.nested}>
-                    <ListItemIcon>
-                      <StarBorder />
-                    </ListItemIcon>
-                    <ListItemText inset primary="Starred" />
-                  </ListItem>
-                </List>
-              </Collapse>
-              </div>
-              
             ) 
           })}
         </List>
