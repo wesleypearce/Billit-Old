@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 const initialState = {
   bills: [],
+  filteredBills: [],
   loading: false
 }
 
@@ -29,22 +30,10 @@ function bills(state = initialState, action) {
         loading: true
       }
     case 'FILTER_BILLS':
-      const startDate = new Date().getTime()
-      const weekOffsetInMs = 604800000
-      const weekFilter = action.weekFilter
-
-      // When weekFilter is passed 0, no filter will be used
-      if(weekFilter === 0) return state
-
-      return [
+      return {
         ...state,
-        {
-          filteredBills: state.filter(bill => bill.dueDateInMs >= startDate && bill.dueDateInMs <= weekFilter * weekOffsetInMs + startDate)
-        }
-      ]
-
-      // return state.filter(bill => bill.dueDateInMs >= startDate && bill.dueDateInMs <= weekFilter * weekOffsetInMs + startDate)
-
+        bills: action.payload
+      }
     default:
       return state
   }

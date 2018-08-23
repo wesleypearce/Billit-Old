@@ -9,16 +9,21 @@ export const deleteBill = id => dispatch => {
   )
 }
 
+export const filterBills = weekFilter => dispatch => {
+  axios.get(`/api/bills/${weekFilter}`).then(res =>
+    dispatch({
+      type: 'FILTER_BILLS',
+      payload: res.data
+    })
+  )
+}
+
 export function selectBill(bill) {
   return { type: 'SELECT_BILL', bill }
 }
 
 export function editBill(bill) {
   return { type: 'EDIT_BILL', bill }
-}
-
-export function filterBills(weekFilter) {
-  return { type: 'FILTER_BILLS', weekFilter}
 }
 
 export const createBill = bill => dispatch => {

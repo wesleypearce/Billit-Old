@@ -11,6 +11,7 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
+import BillTotal from '../components/BillTotal'
 import { deleteBill, editBill, filterBills, getBills } from '../actions/actions'
 import { compose } from 'redux'
 
@@ -33,11 +34,11 @@ class BillViewer extends Component {
   }
 
   // Handle change in week filter. Dispatch FILTER_BILLS
-  handleChange(event) {
+  handleChange = event => {
     this.setState({
       weekFilter: event.target.value
     })
-    this.props.dispatch(filterBills(event.target.value))
+    this.props.filterBills(event.target.value)
   }
   // Function receives an ID from Bill component for deletion of Bill with matching ID from state.bills
   handleDelete = id => this.props.deleteBill(id)
@@ -60,6 +61,8 @@ class BillViewer extends Component {
     return (
       <div className={classes.root}>
         {/* Dropdown menu for bill sorting */}
+
+        <BillTotal />
 
         Due <Select
           value={this.state.weekFilter}
@@ -88,7 +91,7 @@ class BillViewer extends Component {
             return (
               <ListItem 
                 button
-                onClick={this.handleClick}
+                onClick={this.handleDelete.bind(this, bill._id)}
                 key={bill._id}>
                 <ListItemText primary={billInfoString}  secondary={dateFormat} />
               </ListItem>
@@ -101,12 +104,10 @@ class BillViewer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { bills: state.bills}
+  return { bills: state.bills, filteredBills: state.bills.filteredBills }
 }
-
-// export default connect(mapStateToProps, { getBills, deleteBill })(BillViewer)
 
 export default compose(
   withStyles(styles, { name: 'BillViewer' }),
-  connect(mapStateToProps, { getBills, deleteBill })
+  connect(mapStateToProps, { getBills, deleteBill, filterBills })
 )(BillViewer)
