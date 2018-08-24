@@ -5,12 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
 import BillTotal from '../components/BillTotal'
 import { deleteBill, editBill, filterBills, getBills } from '../actions/actions'
 import { compose } from 'redux'
@@ -48,22 +43,20 @@ class BillViewer extends Component {
   }
 
   render() {
-    // Compare dueDates, sort in increasing order, then display each as a Bill component
-    // const compare = (a, b) => {
-    //   if(a.dueDate < b.dueDate) return -1
-    //   if(a.dueDate > b.dueDate) return 1
-    //   return 0
-    // }
-
     const { bills } = this.props.bills
     const { classes } = this.props
 
+
+    // let billTotal = 0
+    // if(bills !== []) {
+    //   console.log(bills)
+    //   billTotal = bills.reduce((accumulator, currentValue) => accumulator + currentValue)
+    // }
+
     return (
       <div className={classes.root}>
+
         {/* Dropdown menu for bill sorting */}
-
-        <BillTotal />
-
         Due <Select
           value={this.state.weekFilter}
           onChange={this.handleChange}
@@ -77,6 +70,7 @@ class BillViewer extends Component {
 
         {/* List of bills according to sort displayed here */}
         <List>
+        
           {bills.map((bill) => {
             // Format dueDate string to (Day of Week)(Month)(Date)
             const offset = 86400000 // Time zone offset in ms

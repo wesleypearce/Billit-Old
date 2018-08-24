@@ -2,7 +2,6 @@ import { combineReducers } from 'redux'
 
 const initialState = {
   bills: [],
-  filteredBills: [],
   loading: false
 }
 
