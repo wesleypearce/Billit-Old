@@ -6,22 +6,66 @@ import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField'
+import Icon from '@material-ui/core/Icon';
+import DeleteIcon from '@material-ui/icons/Delete';
 import BillTotal from '../components/BillTotal'
 import { deleteBill, editBill, filterBills, getBills } from '../actions/actions'
 import { compose } from 'redux'
+
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
-  }
+  },
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
 })
 
 class BillViewer extends Component {
 
   state = {
-    weekFilter: 0
+    weekFilter: 0,
+    open: false,
+    selectedBill: {}
+  }
+
+  handleOpen = (id) => {
+    this.setState({
+      open: true,
+      selectedBill: id
+    })
+  }
+
+  handleClose = () => {
+    this.setState({ open: false })
   }
 
   componentDidMount() {
@@ -45,6 +89,7 @@ class BillViewer extends Component {
   render() {
     const { bills } = this.props.bills
     const { classes } = this.props
+    const { selectedBill } = this.state
 
 
     // let billTotal = 0
@@ -70,7 +115,7 @@ class BillViewer extends Component {
 
         {/* List of bills according to sort displayed here */}
         <List>
-        
+
           {bills.map((bill) => {
             // Format dueDate string to (Day of Week)(Month)(Date)
             const offset = 86400000 // Time zone offset in ms
@@ -83,15 +128,60 @@ class BillViewer extends Component {
             const billInfoString = '$' + bill.cost + ' ' + bill.name
 
             return (
-              <ListItem 
-                button
-                onClick={this.handleDelete.bind(this, bill._id)}
+              <ListItem
                 key={bill._id}>
                 <ListItemText primary={billInfoString}  secondary={dateFormat} />
+                <button onClick={this.handleOpen.bind(this, bill)}>Edit</button>
               </ListItem>
-            ) 
+            )
           })}
         </List>
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.open}
+          onClose={this.handleClose}
+        >
+        <div style={getModalStyle()} className={classes.paper}>
+          <Typography variant="title" id="modal-title">
+            Edit Bill
+          </Typography>
+          <Typography variant="subheading" id="simple-modal-description">
+          <form className={classes.container} noValidate>
+            <TextField
+              id="name"
+              label="Name"
+              type="text"
+              name="name"
+              defaultValue={selectedBill.name}
+              onChange={this.handleInputChange}
+              className={classes.textField}
+            /><br />
+            <TextField
+              id="cost"
+              label="Cost"
+              type="number"
+              name="cost"
+              defaultValue={selectedBill.cost}
+              onChange={this.handleInputChange}
+              className={classes.textField}
+            /><br />
+            <TextField
+              id="date"
+              label="Due Date"
+              type="date"
+              name="dueDate"
+              defaultValue={selectedBill.dueDate}
+              onChange={this.handleInputChange}
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </form>
+          </Typography>
+        </div>
+        </Modal>
       </div>
     )
   }
