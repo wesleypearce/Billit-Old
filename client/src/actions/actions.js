@@ -36,10 +36,17 @@ export const createBill = bill => dispatch => {
 }
 
 export const getBills = () => dispatch => {
+  dispatch(setItemsLoading())
   axios.get('/api/bills').then(res => 
     dispatch({
       type: 'GET_BILLS',
       payload: res.data
     })
   )
+}
+
+export const setItemsLoading = () => {
+  return {
+    type: 'ITEMS_LOADING'
+  }
 }
