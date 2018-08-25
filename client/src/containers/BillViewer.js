@@ -90,6 +90,7 @@ class BillViewer extends Component {
     const { bills } = this.props.bills
     const { classes } = this.props
     const { selectedBill } = this.state
+    console.log(selectedBill.dueDate)
 
 
     // let billTotal = 0
@@ -179,6 +180,9 @@ class BillViewer extends Component {
               }}
             />
           </form>
+          <Button variant="outlined" onClick={this.handleClick} className={classes.button} color="primary">
+            Submit
+          </Button>
           </Typography>
         </div>
         </Modal>
