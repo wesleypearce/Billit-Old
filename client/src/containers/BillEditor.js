@@ -75,8 +75,7 @@ class BillEditor extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    bills: state.bills,
-    billSelect: state.activeBill
+    bills: state.bills
   }
 }
 

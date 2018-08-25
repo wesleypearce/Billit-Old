@@ -38,22 +38,8 @@ function bills(state = initialState, action) {
   }
 }
 
-// May not need this. Depends on how I editting a bill will be worked out
-function billSelect(state = [{ billSelected: false }], action) {
-  switch(action.type) {
-    case 'SELECT_BILL':
-      return {
-        activeBill: action.bill,
-        billSelected: true
-      }
-    default:
-      return state
-  }
-}
-
 const rootReducer = combineReducers({
-  bills,
-  billSelect
+  bills
 })
 
 export default rootReducer
