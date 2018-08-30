@@ -24,8 +24,22 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4,
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '5px'
+  },
+  filterSelector: {
+    flexGrow: 1,
+    alignSelf: 'center',
+    margin: '5px'
+  },
+  billViewer: {
+    flexGrow: 1,
+    margin: '5px'
+  }
 })
 
 class BillViewer extends Component {
@@ -53,45 +67,49 @@ class BillViewer extends Component {
     const { classes } = this.props
 
     return (
-      <div className={classes.root}>
+      <div className={classes.container}>
 
         {/* Dropdown menu for bill sorting */}
-        Due <Select
-          value={this.state.weekFilter}
-          onChange={this.handleChange}
-        >
-          <MenuItem value={0}>Anytime</MenuItem>
-          <MenuItem value={1}>in 1 Week</MenuItem>
-          <MenuItem value={2}>in 2 Weeks</MenuItem>
-          <MenuItem value={3}>in 3 Weeks</MenuItem>
-          <MenuItem value={4}>in 4 Weeks</MenuItem>
-        </Select>
-
+        <div className={classes.filterSelector}>
+          Due <Select
+            value={this.state.weekFilter}
+            onChange={this.handleChange}
+          >
+            <MenuItem value={0}>Anytime</MenuItem>
+            <MenuItem value={1}>in 1 Week</MenuItem>
+            <MenuItem value={2}>in 2 Weeks</MenuItem>
+            <MenuItem value={3}>in 3 Weeks</MenuItem>
+            <MenuItem value={4}>in 4 Weeks</MenuItem>
+          </Select>
+        </div>
+        
         {/* List of bills according to sort displayed here */}
-        <List>
+        <div className={classes.billViewer}>
+          <List>
 
-          {bills.map((bill) => {
-            // Format dueDate string to (Day of Week)(Month)(Date)
-            const offset = 86400000 // Time zone offset in ms
-            const date = new Date(Date.parse(bill.dueDate) + offset)
-            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            const dateFormat = days[date.getDay()] + ' ' + months[date.getMonth()] + ' ' + date.getDate() + ' ' + date.getFullYear()
+            {bills.map((bill) => {
+              // Format dueDate string to (Day of Week)(Month)(Date)
+              const offset = 86400000 // Time zone offset in ms
+              const date = new Date(Date.parse(bill.dueDate) + offset)
+              const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+              const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+              const dateFormat = days[date.getDay()] + ' ' + months[date.getMonth()] + ' ' + date.getDate() + ' ' + date.getFullYear()
 
-            // Format bill info string
-            const billInfoString = '$' + bill.cost + ' ' + bill.name
+              // Format bill info string
+              const billInfoString = '$' + bill.cost + ' ' + bill.name
 
-            return (
-              <ListItem
-                key={bill._id}>
-                <ListItemText primary={billInfoString}  secondary={dateFormat} />
-                <Button color="secondary" variant="outlined" onClick={this.handleDelete.bind(this, bill._id)} className={classes.button}>
-                  Delete
-                </Button>
-              </ListItem>
-            )
-          })}
-        </List>
+              return (
+                <ListItem
+                  key={bill._id}>
+                  <ListItemText primary={billInfoString}  secondary={dateFormat} />
+                  <Button color="primary" variant="outlined" onClick={this.handleDelete.bind(this, bill._id)} className={classes.button}>
+                    Delete
+                  </Button>
+                </ListItem>
+              )
+            })}
+          </List>
+        </div>
       </div>
     )
   }
