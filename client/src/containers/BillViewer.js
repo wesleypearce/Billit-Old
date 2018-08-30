@@ -24,8 +24,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4,
   },
   button: {
-    margin: theme.spacing.unit,
-    color: 'red'
+    margin: theme.spacing.unit
   },
   container: {
     display: 'flex',
@@ -103,7 +102,7 @@ class BillViewer extends Component {
                 <ListItem
                   key={bill._id}>
                   <ListItemText primary={billInfoString}  secondary={dateFormat} />
-                  <Button color="secondary" variant="outlined" onClick={this.handleDelete.bind(this, bill._id)} className={classes.button}>
+                  <Button color="primary" variant="outlined" onClick={this.handleDelete.bind(this, bill._id)} className={classes.button}>
                     Delete
                   </Button>
                 </ListItem>
