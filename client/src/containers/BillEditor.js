@@ -3,10 +3,25 @@ import { connect } from 'react-redux'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { createBill } from '../actions/actions'
+import { compose } from 'redux'
+import { withStyles } from '@material-ui/core/styles'
 
 const billEditorStyle = {
   backgroundColor: 'white'
 }
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    padding: '5px',
+    flexDirection: 'column'
+  },
+  button: {
+    flexGrow: 1,
+    margin: '5px',
+    alignSelf: 'center'
+  }
+})
 
 class BillEditor extends Component {
   state = {
@@ -28,7 +43,7 @@ class BillEditor extends Component {
   }
 
   render() {
-    const classes = this.props;
+    const { classes } = this.props;
 
     return (
       <div style={billEditorStyle}>
@@ -66,7 +81,7 @@ class BillEditor extends Component {
         />
       </form>
       <Button variant="outlined" onClick={this.handleClick} className={classes.button} color="primary">
-        Submit
+        Create
       </Button>
       </div>
     )
@@ -79,4 +94,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { createBill })(BillEditor)
+export default compose(
+  withStyles(styles, { name: 'BillEditor' }),
+  connect(mapStateToProps, { createBill })
+)(BillEditor)
