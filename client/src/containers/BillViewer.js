@@ -8,6 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import { deleteBill, filterBills, getBills } from '../actions/actions'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { compose } from 'redux'
 
 const styles = theme => ({
@@ -39,6 +40,9 @@ const styles = theme => ({
   billViewer: {
     flexGrow: 1,
     margin: '5px'
+  },
+  progress: {
+    margin: theme.spacing.unit * 2,
   }
 })
 
@@ -66,6 +70,14 @@ class BillViewer extends Component {
     const { bills } = this.props.bills
     const { classes } = this.props
 
+    if(bills.loading) {
+      return (
+        <div>
+          <CircularProgress className={classes.progress} color="secondary" size={100} />
+        </div>
+      )
+    }
+
     return (
       <div className={classes.container}>
 
@@ -82,7 +94,7 @@ class BillViewer extends Component {
             <MenuItem value={4}>in 4 Weeks</MenuItem>
           </Select>
         </div>
-        
+
         {/* List of bills according to sort displayed here */}
         <div className={classes.billViewer}>
           <List>
