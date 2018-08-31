@@ -81,8 +81,9 @@ class BillViewer extends Component {
             <MenuItem value={3}>in 3 Weeks</MenuItem>
             <MenuItem value={4}>in 4 Weeks</MenuItem>
           </Select>
+          test
         </div>
-        
+
         {/* List of bills according to sort displayed here */}
         <div className={classes.billViewer}>
           <List>
