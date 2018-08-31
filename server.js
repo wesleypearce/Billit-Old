@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const path = require('path')
+const wakeHeroku = require('./wakeHeroku')
 
 const bills = require('./routes/api/bills')
 
