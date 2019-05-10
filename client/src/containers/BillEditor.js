@@ -27,7 +27,8 @@ class BillEditor extends Component {
   state = {
     name: '',
     cost: 0,
-    dueDate: ''
+    dueDate: '',
+    isEdit: false
   }
 
   // On submit of new bill form, a new bill is created and stored in the redux store
@@ -44,10 +45,16 @@ class BillEditor extends Component {
 
   render() {
     const { classes } = this.props;
+    let message;
+    if(this.state.isEdit === false) {
+      message = 'Create a Bill';
+    } else {
+      message = 'Edit a Bill';
+    }
 
     return (
       <div style={billEditorStyle}>
-      <h3>Create a Bill</h3>
+      <h3>{message}</h3>
       <form className={classes.container} noValidate>
         <TextField
           id="name"

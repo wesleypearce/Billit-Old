@@ -66,9 +66,12 @@ class BillViewer extends Component {
   // Function receives an ID from Bill component for deletion of Bill with matching ID from state.bills
   handleDelete = id => this.props.deleteBill(id)
 
+  handleClick = () => console.log('clicked');
+
   render() {
     const { bills } = this.props.bills
     const { classes } = this.props
+    let total = 0
 
     if(bills.loading) {
       return (
@@ -106,13 +109,16 @@ class BillViewer extends Component {
               const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
               const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
               const dateFormat = days[date.getDay()] + ' ' + months[date.getMonth()] + ' ' + date.getDate() + ' ' + date.getFullYear()
+              total += bill.cost
 
               // Format bill info string
               const billInfoString = '$' + bill.cost + ' ' + bill.name
 
               return (
                 <ListItem
-                  key={bill._id}>
+                  button
+                  key={bill._id}
+                  onClick={this.handleClick}>
                   <ListItemText primary={billInfoString}  secondary={dateFormat} />
                   <Button color="primary" variant="outlined" onClick={this.handleDelete.bind(this, bill._id)} className={classes.button}>
                     Delete
@@ -121,6 +127,7 @@ class BillViewer extends Component {
               )
             })}
           </List>
+          <p>Total due: {total}</p>
         </div>
       </div>
     )
