@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BillViewer from './containers/BillViewer'
 import BillEditor from './containers/BillEditor'
+import CreateBill from './containers/CreateBill'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -11,6 +12,7 @@ import Button from '@material-ui/core/Button'
 import CardContent from '@material-ui/core/CardContent'
 import Card from '@material-ui/core/Card'
 import './style.css'
+import '../node_modules/bulma/css/bulma.min.css'
 
 // const theme = createMuiTheme({
 //   palette: {
@@ -68,24 +70,7 @@ class App extends Component {
   render() {
     const { classes } = this.props
     return (
-      <MuiThemeProvider theme={theme}>
-      <div className={classes.container}>
-        <AppBar className={classes.appBar} position="static" color="secondary">
-          <Toolbar>
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              Billit!
-            </Typography>
-            <Button color="inherit" href="https://github.com/wesleypearce/Billit">Github</Button>
-          </Toolbar>
-        </AppBar>
-        <Card className={classes.card}>
-          <CardContent>
-            <BillEditor className={classes.billEditor} />
-          </CardContent>
-        </Card>
-        <BillViewer className={classes.billViewer} />
-      </div>
-      </MuiThemeProvider>
+      <CreateBill />
     )
   }
 }
