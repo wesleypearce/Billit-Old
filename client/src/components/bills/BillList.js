@@ -56,10 +56,18 @@ class BillList extends React.Component {
             const billInfoString = '$' + bill.cost + ' ' + bill.name
 
             return (
-              <div className="box" key={bill._id}>
-                <p>{billInfoString}</p>
-                <p>{dateFormat}</p>
-                <button className="button is-danger" onClick={this.handleDelete.bind(this, bill._id)}>Delete</button>
+              <div className="card" key={bill._id}>
+                <div className="card-content">
+                  <div className="media">
+                    <div className="media-content">
+                      <p className="title is-4">{billInfoString}</p>
+                      <p>{dateFormat}</p>
+                    </div>
+                    <div className="media-right">
+                      <button className="button is-danger" onClick={this.handleDelete.bind(this, bill._id)}>Delete</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )
           })} 
