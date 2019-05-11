@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getBills, filterBills, deleteBill } from '../actions'
 
+// TODO: New bill created should be added to list in order of date
+
 class BillList extends React.Component {
 
   state = {

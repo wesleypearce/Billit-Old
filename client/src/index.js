@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import store from './store'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import '../node_modules/jquery/dist/jquery.min.js'
-import '../node_modules/bootstrap/dist/js/bootstrap.min.js'
-import 'typeface-roboto'
-import registerServiceWorker from './registerServiceWorker';
+import { createStore, applyMiddle, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import App from './App'
+import reducers from './reducers'
+import registerServiceWorker from './registerServiceWorker'
+
+const store = createStore(reducers, applyMiddleware(thunk))
 
 ReactDOM.render(
   <Provider store={store}>
