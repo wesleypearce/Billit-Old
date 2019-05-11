@@ -29,19 +29,26 @@ class BillList extends React.Component {
     let total = 0
 
     return (
-      <div>
-        <div className="control">
-          <div className="select" onChange={this.handleChange}>
-            <select>
-              <option value={0}>Anytime</option>
-              <option value={1}>in 1 Week</option>
-              <option value={2}>in 2 Weeks</option>
-              <option value={3}>in 3 Weeks</option>
-              <option value={4}>in 4 Weeks</option>
-            </select>
+      <React.Fragment>
+        <div className="level">
+          <div className="level-left">
+            <div className="control">
+              <div className="select" onChange={this.handleChange}>
+                <select>
+                  <option value={0}>Anytime</option>
+                  <option value={1}>in 1 Week</option>
+                  <option value={2}>in 2 Weeks</option>
+                  <option value={3}>in 3 Weeks</option>
+                  <option value={4}>in 4 Weeks</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div className="level-right">
+            <p className="title is-3">Total Due: {total}</p>
           </div>
         </div>
-        
+          
         <div className="list">
           {bills.map((bill) => {
             // Format dueDate string to (Day of Week)(Month)(Date)
@@ -72,8 +79,7 @@ class BillList extends React.Component {
             )
           })} 
         </div>
-        <p>Total due: {total}</p>    
-      </div>
+      </React.Fragment>
     )
   }
 }
