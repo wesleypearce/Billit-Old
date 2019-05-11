@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CreateBill from './components/CreateBill'
-import BillList from './components/BillList'
+import CreateBill from './components/bills/CreateBill'
+import BillList from './components/bills/BillList'
 import NavBar from './components/NavBar'
 import '../node_modules/bulma/css/bulma.min.css'
 
