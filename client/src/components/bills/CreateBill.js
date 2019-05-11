@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createBill } from '../actions'
+import { createBill } from '../../actions'
 
 class CreateBill extends React.Component {
   state = {
