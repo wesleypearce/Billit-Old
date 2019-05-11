@@ -29,19 +29,26 @@ class BillList extends React.Component {
     let total = 0
 
     return (
-      <div>
-        <div className="control">
-          <div className="select" onChange={this.handleChange}>
-            <select>
-              <option value={0}>Anytime</option>
-              <option value={1}>in 1 Week</option>
-              <option value={2}>in 2 Weeks</option>
-              <option value={3}>in 3 Weeks</option>
-              <option value={4}>in 4 Weeks</option>
-            </select>
+      <React.Fragment>
+        <div className="level">
+          <div className="level-left">
+            <div className="control">
+              <div className="select" onChange={this.handleChange}>
+                <select>
+                  <option value={0}>Anytime</option>
+                  <option value={1}>in 1 Week</option>
+                  <option value={2}>in 2 Weeks</option>
+                  <option value={3}>in 3 Weeks</option>
+                  <option value={4}>in 4 Weeks</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div className="level-right">
+            <p className="title is-3">Total Due: {total}</p>
           </div>
         </div>
-        
+          
         <div className="list">
           {bills.map((bill) => {
             // Format dueDate string to (Day of Week)(Month)(Date)
@@ -56,16 +63,23 @@ class BillList extends React.Component {
             const billInfoString = '$' + bill.cost + ' ' + bill.name
 
             return (
-              <div className="box" key={bill._id}>
-                <p>{billInfoString}</p>
-                <p>{dateFormat}</p>
-                <button className="button is-danger" onClick={this.handleDelete.bind(this, bill._id)}>Delete</button>
+              <div className="card" key={bill._id}>
+                <div className="card-content">
+                  <div className="media">
+                    <div className="media-content">
+                      <p className="title is-4">{billInfoString}</p>
+                      <p>{dateFormat}</p>
+                    </div>
+                    <div className="media-right">
+                      <button className="button is-danger" onClick={this.handleDelete.bind(this, bill._id)}>Delete</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )
           })} 
         </div>
-        <p>Total due: {total}</p>    
-      </div>
+      </React.Fragment>
     )
   }
 }

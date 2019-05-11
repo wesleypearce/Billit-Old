@@ -7,6 +7,12 @@ class NavBar extends React.Component {
         <div className="navbar-brand">
           <a className="navbar-item">BillIt</a>
         </div>
+
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <button className="button is-secondary">Log In</button>
+          </div>
+        </div>
     </div>
     )
   }

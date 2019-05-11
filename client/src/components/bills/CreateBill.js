@@ -22,6 +22,7 @@ class CreateBill extends React.Component {
   render() {
     return (
       <div>
+        <h1 className="title">Create a Bill</h1>
         <div className="field">
           <label className="label">Name</label>
           <div className="control">
