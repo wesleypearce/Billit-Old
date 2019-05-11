@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BillViewer from './containers/BillViewer'
 import BillEditor from './containers/BillEditor'
 import CreateBill from './containers/CreateBill'
+import BillList from './containers/BillList'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -70,7 +71,7 @@ class App extends Component {
   render() {
     const { classes } = this.props
     return (
-      <CreateBill />
+      <BillList />
     )
   }
 }
