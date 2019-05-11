@@ -69,9 +69,15 @@ const styles = {
 
 class App extends Component {
   render() {
-    const { classes } = this.props
     return (
-      <BillList />
+      <div className="columns">
+        <div className="column">
+          <CreateBill />
+        </div>
+        <div className="column">
+          <BillList />
+        </div>
+      </div>
     )
   }
 }

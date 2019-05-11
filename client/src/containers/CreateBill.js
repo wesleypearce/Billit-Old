@@ -10,7 +10,7 @@ class CreateBill extends React.Component {
   }
 
   handleClick = () => {
-    this.props.CreateBill(this.state)
+    this.props.createBill(this.state)
   }
 
   handleInputChange = event => {
@@ -25,19 +25,19 @@ class CreateBill extends React.Component {
         <div className="field">
           <label className="label">Name</label>
           <div className="control">
-            <input className="input" onChange={this.handleInputChange} type="text" placeholder="" />          
+            <input className="input" onChange={this.handleInputChange} name="name" type="text" placeholder="" />          
           </div>
         </div>
         <div className="field">
           <label className="label">Cost</label>
           <div className="control">
-            <input className="input" onChange={this.handleInputChange} type="number" placeholder="" />          
+            <input className="input" onChange={this.handleInputChange} name="cost" type="number" placeholder="" />          
           </div>
         </div>
         <div className="field">
           <label className="label">Due Date</label>
           <div className="control">
-            <input className="input" onChange={this.handleInputChange} type="date" placeholder={Date.now()} />          
+            <input className="input" onChange={this.handleInputChange} name="dueDate" type="date" placeholder={Date.now()} />          
           </div>
         </div>
         <div className="control">

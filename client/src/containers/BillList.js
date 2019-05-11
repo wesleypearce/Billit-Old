@@ -29,7 +29,7 @@ class BillList extends React.Component {
     return (
       <div>
         <div className="control">
-          <div className="select">
+          <div className="select" onChange={this.handleChange}>
             <select>
               <option value={0}>Anytime</option>
               <option value={1}>in 1 Week</option>
