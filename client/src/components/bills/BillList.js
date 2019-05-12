@@ -71,6 +71,9 @@ class BillList extends React.Component {
                       <p>{dateFormat}</p>
                     </div>
                     <div className="media-right">
+                      <button className="button is-info" onClick={this.handleDelete.bind(this, bill._id)}>Edit</button>
+                    </div>
+                    <div className="media-right">
                       <button className="button is-danger" onClick={this.handleDelete.bind(this, bill._id)}>Delete</button>
                     </div>
                   </div>
