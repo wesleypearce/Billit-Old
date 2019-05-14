@@ -1,52 +1,67 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
 import { createBill } from '../../actions'
 
 class CreateBill extends React.Component {
-  state = {
-    name: '',
-    cost: 0,
-    dueDate: ''
+  renderError({ error, touched }) {
+    if (touched && error) {
+      return (
+        <h3 className="">{error}</h3>
+      )
+    }
   }
-
-  handleClick = () => {
-    this.props.createBill(this.state)
-  }
-
-  handleInputChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
-  render() {
+  renderInput = ({ input, label, type, meta }) => {
+    console.log(meta)
     return (
       <div>
-        <h1 className="title">Create a Bill</h1>
-        <div className="field">
-          <label className="label">Name</label>
-          <div className="control">
-            <input className="input" onChange={this.handleInputChange} name="name" type="text" placeholder="" />          
-          </div>
-        </div>
-        <div className="field">
-          <label className="label">Cost</label>
-          <div className="control">
-            <input className="input" onChange={this.handleInputChange} name="cost" type="number" placeholder="" />          
-          </div>
-        </div>
-        <div className="field">
-          <label className="label">Due Date</label>
-          <div className="control">
-            <input className="input" onChange={this.handleInputChange} name="dueDate" type="date" placeholder={Date.now()} />          
-          </div>
-        </div>
+        <label className="label">{label}</label>
         <div className="control">
-          <button className="button is-primary" onClick={this.handleClick}>Create</button>
+          <input className="input" type={type} {...input} />
+          {this.renderError(meta)}
         </div>
       </div>
     )
   }
+
+  onSubmit(formValues) {
+    console.log(formValues)
+  }
+
+  render() {
+    return (
+      <div className="block">
+        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <div className="field">
+            <Field name="name" component={this.renderInput} label="Bill name" type="text" />
+            <Field name="cost" component={this.renderInput} label="Bill cost" type="number" />
+            <Field name="dueDate" component={this.renderInput} label="Bill due date" type="date" />
+            <div className="control">
+              <button className="button is-primary">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    )
+  }
+}
+
+const validate = formValues => {
+  const errors = {}
+
+  if (!formValues.name) {
+    errors.name = 'You must enter a name'
+  }
+
+  if (!formValues.cost) {
+    errors.cost = 'You must enter a cost'
+  }
+
+  if (!formValues.dueDate) {
+    errors.dueDate = 'You must enter a due date'
+  }
+
+  return errors
 }
 
 const mapStateToProps = state => {
@@ -55,7 +70,24 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(
+
+
+// const formWrapped = reduxForm({
+//   form: 'createBill',
+//   validate
+// })(CreateBill)
+
+// export default connect(
+//   mapStateToProps,
+//   { createBill }
+// )(formWrapped)
+
+const wrapped = connect(
   mapStateToProps,
   { createBill }
 )(CreateBill)
+
+export default reduxForm({
+  form: 'createBill',
+  validate
+})(wrapped)
