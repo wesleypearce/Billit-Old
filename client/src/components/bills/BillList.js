@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { format } from 'date-fns'
 import { getBills, filterBills, deleteBill } from '../../actions'
 
 // TODO: New bill created should be added to list in order of date
@@ -49,13 +50,6 @@ class BillList extends React.Component {
         </div>
         <div className="list">
           {this.props.bills.map((bill) => {
-            // Format dueDate string to (Day of Week)(Month)(Date)
-            const offset = 86400000 // Time zone offset in ms
-            const date = new Date(Date.parse(bill.dueDate) + offset)
-            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            const dateFormat = days[date.getDay()] + ' ' + months[date.getMonth()] + ' ' + date.getDate() + ' ' + date.getFullYear()
-            total += bill.cost
 
             // Format bill info string
             const billInfoString = '$' + bill.cost + ' ' + bill.name
@@ -66,7 +60,7 @@ class BillList extends React.Component {
                   <div className="media">
                     <div className="media-content">
                       <p className="title is-4">{billInfoString}</p>
-                      <p>{dateFormat}</p>
+                      <p>{format(bill.dueDate, 'dddd MMM Do YYYY')}</p>
                     </div>
                     <div className="media-right">
                       <button className="button is-info" onClick={this.handleDelete.bind(this, bill._id)}>Edit</button>
