@@ -1,32 +1,15 @@
+import _ from 'lodash'
 import { GET_BILLS, CREATE_BILL, FILTER_BILLS, ITEMS_LOADING, DELETE_BILL } from '../actions/types'
 
-const initialState = {
-  bills: [],
-  loading: false
-}
-
-export default function billsReducer(state = initialState, action) {
+export default function billsReducer(state = {}, action) {
   switch (action.type) {
     case CREATE_BILL:
       return {
-        ...state,
-        bills: [action.payload, ...state.bills]
+        ...state, [action.payload.id]: action.payload
       }
     case GET_BILLS:
       return {
-        ...state,
-        bills: action.payload,
-        loading: false
-      }
-    case DELETE_BILL:
-      return {
-        ...state,
-        bills: state.bills.filter(bill => bill._id !== action.payload)
-      }
-    case ITEMS_LOADING:
-      return {
-        ...state,
-        loading: true
+        ...state, ..._.mapKeys(action.payload, '_id')
       }
     case FILTER_BILLS:
       return {

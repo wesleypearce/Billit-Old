@@ -25,7 +25,6 @@ class BillList extends React.Component {
   handleDelete = id => this.props.deleteBill(id)
 
   render() {
-    const { bills } = this.props.bills
     let total = 0
 
     return (
@@ -48,9 +47,8 @@ class BillList extends React.Component {
             <p className="title is-3">Total Due: {total}</p>
           </div>
         </div>
-          
         <div className="list">
-          {bills.map((bill) => {
+          {this.props.bills.map((bill) => {
             // Format dueDate string to (Day of Week)(Month)(Date)
             const offset = 86400000 // Time zone offset in ms
             const date = new Date(Date.parse(bill.dueDate) + offset)
@@ -81,7 +79,8 @@ class BillList extends React.Component {
               </div>
             )
           })} 
-        </div>
+        </div>          
+
       </React.Fragment>
     )
   }
@@ -89,7 +88,7 @@ class BillList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    bills: state.bills
+    bills: Object.values(state.bills)
   }
 }
 

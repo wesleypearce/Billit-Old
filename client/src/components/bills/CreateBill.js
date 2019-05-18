@@ -24,8 +24,8 @@ class CreateBill extends React.Component {
     )
   }
 
-  onSubmit(formValues) {
-    console.log(formValues)
+  onSubmit = (formValues) => {
+    this.props.createBill(formValues)
   }
 
   render() {
