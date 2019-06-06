@@ -16,6 +16,8 @@ export default function billsReducer(state = {}, action) {
         ...state,
         bills: action.payload
       }
+    case DELETE_BILL:
+      return _.omit(state, action.payload)
     default:
       return state
   }
