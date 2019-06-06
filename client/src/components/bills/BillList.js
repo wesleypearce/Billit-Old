@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import { getBills, filterBills, deleteBill } from '../../actions'
 
@@ -63,7 +64,7 @@ class BillList extends React.Component {
                       <p>{format(bill.dueDate, 'dddd MMM Do YYYY')}</p>
                     </div>
                     <div className="media-right">
-                      <button className="button is-info" onClick={this.handleDelete.bind(this, bill._id)}>Edit</button>
+                      <Link className="button is-info" to="bills/edit">Edit</Link>
                     </div>
                     <div className="media-right">
                       <button className="button is-danger" onClick={this.handleDelete.bind(this, bill._id)}>Delete</button>
