@@ -64,7 +64,7 @@ class BillList extends React.Component {
                       <p>{format(bill.dueDate, 'dddd MMM Do YYYY')}</p>
                     </div>
                     <div className="media-right">
-                      <Link className="button is-info" to="bills/edit">Edit</Link>
+                      <Link className="button is-info" to={`/bills/edit/${bill._id}`}>Edit</Link>
                     </div>
                     <div className="media-right">
                       <button className="button is-danger" onClick={this.handleDelete.bind(this, bill._id)}>Delete</button>

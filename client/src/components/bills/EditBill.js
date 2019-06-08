@@ -2,6 +2,7 @@ import React from 'react'
 
 class EditBill extends React.Component {
   render() {
+    console.log(this.props.match.params.id)
     return (
       <div>
         <h1 className="title">Edit a Bill</h1>

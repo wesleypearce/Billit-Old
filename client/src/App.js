@@ -23,7 +23,7 @@ class App extends Component {
             <div className="column">
                 <Route path="/" exact component={Home} />
                 <Route path="/bills/new" component={CreateBill} />
-                <Route path="/bills/edit" component={EditBill} />
+                <Route path="/bills/edit/:id" component={EditBill} />
             </div>
             <div className="column">
               <BillList />
