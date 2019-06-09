@@ -1,5 +1,12 @@
 import _ from 'lodash'
-import { GET_BILLS, CREATE_BILL, FILTER_BILLS, ITEMS_LOADING, DELETE_BILL, SELECT_BILL } from '../actions/types'
+import { GET_BILLS, 
+  CREATE_BILL, 
+  FILTER_BILLS, 
+  ITEMS_LOADING, 
+  DELETE_BILL, 
+  SELECT_BILL,
+  EDIT_BILL
+} from '../actions/types'
 
 const initialState = {
   bills: {},
@@ -12,6 +19,14 @@ export default function billsReducer(state = initialState, action) {
       return {
         ...state, 
         bills: { 
+          ...state.bills, [action.payload._id]: action.payload
+        }
+      }
+    case EDIT_BILL:
+      console.log(action.payload)
+      return {
+        ...state,
+        bills: {
           ...state.bills, [action.payload._id]: action.payload
         }
       }

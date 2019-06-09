@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import { createBill } from '../../actions'
+import { editBill } from '../../actions'
 
 class EditBill extends React.Component {
   renderError({ error, touched }) {
@@ -12,7 +12,6 @@ class EditBill extends React.Component {
     }
   }
   renderInput = ({ input, label, type, meta }) => {
-    console.log(meta)
     return (
       <div>
         <label className="label">{label}</label>
@@ -27,7 +26,9 @@ class EditBill extends React.Component {
   }
 
   onSubmit = (formValues) => {
-    this.props.createBill(formValues)
+    console.log(formValues)
+    console.log(this.props.bill._id)
+    this.props.editBill(this.props.bill._id, formValues)
   }
 
   render() {
@@ -88,10 +89,10 @@ const mapStateToProps = state => {
 
 const wrapped = connect(
   mapStateToProps,
-  { createBill }
+  { editBill }
 )(EditBill)
 
 export default reduxForm({
-  form: 'createBill',
+  form: 'editBill',
   validate
 })(wrapped)
