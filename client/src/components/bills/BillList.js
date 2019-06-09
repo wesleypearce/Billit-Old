@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getBills, filterBills, deleteBill } from '../../actions'
+import { Link } from 'react-router-dom'
+import { format } from 'date-fns'
+import { getBills, filterBills, deleteBill, selectBill } from '../../actions'
 
 // TODO: New bill created should be added to list in order of date
 
@@ -24,8 +26,9 @@ class BillList extends React.Component {
 
   handleDelete = id => this.props.deleteBill(id)
 
+  handleEdit = id => this.props.selectBill(id)
+
   render() {
-    const { bills } = this.props.bills
     let total = 0
 
     return (
@@ -48,16 +51,8 @@ class BillList extends React.Component {
             <p className="title is-3">Total Due: {total}</p>
           </div>
         </div>
-          
         <div className="list">
-          {bills.map((bill) => {
-            // Format dueDate string to (Day of Week)(Month)(Date)
-            const offset = 86400000 // Time zone offset in ms
-            const date = new Date(Date.parse(bill.dueDate) + offset)
-            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            const dateFormat = days[date.getDay()] + ' ' + months[date.getMonth()] + ' ' + date.getDate() + ' ' + date.getFullYear()
-            total += bill.cost
+          {this.props.bills.map((bill) => {
 
             // Format bill info string
             const billInfoString = '$' + bill.cost + ' ' + bill.name
@@ -68,7 +63,10 @@ class BillList extends React.Component {
                   <div className="media">
                     <div className="media-content">
                       <p className="title is-4">{billInfoString}</p>
-                      <p>{dateFormat}</p>
+                      <p>{format(bill.dueDate, 'dddd MMM Do YYYY')}</p>
+                    </div>
+                    <div className="media-right">
+                      <Link className="button is-info" onClick={this.handleEdit.bind(this, bill._id)} to={`/bills/edit/${bill._id}`}>Edit</Link>
                     </div>
                     <div className="media-right">
                       <button className="button is-danger" onClick={this.handleDelete.bind(this, bill._id)}>Delete</button>
@@ -78,7 +76,8 @@ class BillList extends React.Component {
               </div>
             )
           })} 
-        </div>
+        </div>          
+
       </React.Fragment>
     )
   }
@@ -86,11 +85,11 @@ class BillList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    bills: state.bills
+    bills: Object.values(state.bills.bills)
   }
 }
 
 export default connect(
   mapStateToProps,
-  { getBills, filterBills, deleteBill }
+  { getBills, filterBills, deleteBill, selectBill }
 )(BillList)

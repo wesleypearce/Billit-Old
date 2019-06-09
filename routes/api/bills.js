@@ -58,12 +58,45 @@ router.get('/:weekFilter', (req, res) => {
 // @route   EDIT api/bills ????
 // @desc    Edits a bill
 // @access  Public
-router.post('/:id', (req, res) => {
-  Bill.findById(req.params.id)
-    .then(bill => bill.update({
-      name: req.body.name,
-      cost: req.body.cost
-    }).then(() => console.log('bill entered')))
+router.put('/:id', (req, res) => {
+  // Bill.findById(req.params._id)
+  //   .then(bill => bill.update({
+  //     name: req.body.name,
+  //     cost: req.body.cost,
+  //     dueDate: req.body.dueDate
+  //   }).then((bill) => res.json(bill)))
+
+  var id = req.params._id
+  var bill = req.body
+  Bill.findOneAndUpdate(id, bill, {new: true}, function(err) {
+    if(err) {
+      throw err
+    }
+  }).then((newBill) => {
+    res.json(newBill)
+  })
+
+  // Bill.findOne({_id: req.params.id}, function(err, foundObject) {
+  //   if(err) {
+  //     console.log(err)
+  //     res.status(500).send()
+  //   } else {
+  //     if(!foundObject) {
+  //       res.status(404).send
+  //     } else {
+  //       updatedObject = req.body
+  //       console.log(updatedObject)
+  //       foundObject.save(function(err, updatedObject) {
+  //         if(err) {
+  //           console.log(err)
+  //           res.status(500).send()
+  //         } else {
+  //           res.json(updatedObject)
+  //         }
+  //       })
+  //     }
+  //   }
+  // })
 })
 
 module.exports = router

@@ -17,19 +17,19 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar />
-        <div className="columns" style={styles.margin}>
-          <div className="column">
-            <Router>
-              <Route path="/" exact component={Home} />
-              <Route path="/bills/new" component={CreateBill} />
-              <Route path="/bills/edit" component={EditBill} />
-            </Router>
+        <Router>
+          <NavBar />
+          <div className="columns" style={styles.margin}>
+            <div className="column">
+                <Route path="/" exact component={Home} />
+                <Route path="/bills/new" component={CreateBill} />
+                <Route path="/bills/edit/:id" component={EditBill} />
+            </div>
+            <div className="column">
+              <BillList />
+            </div>
           </div>
-          <div className="column">
-            <BillList />
-          </div>
-        </div>
+        </Router>
       </React.Fragment>
     )
   }
