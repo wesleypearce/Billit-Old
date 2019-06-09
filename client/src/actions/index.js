@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_BILLS, CREATE_BILL, DELETE_BILL, FILTER_BILLS } from './types'
+import { GET_BILLS, CREATE_BILL, DELETE_BILL, FILTER_BILLS, SELECT_BILL } from './types'
 
 export const deleteBill = id => dispatch => {
   axios.delete(`/api/bills/${id}`).then(res =>
@@ -35,4 +35,11 @@ export const getBills = () => dispatch => {
       payload: res.data
     })
   )
+}
+
+export const selectBill = id => {
+  return {
+    type: SELECT_BILL,
+    payload: id
+  }
 }

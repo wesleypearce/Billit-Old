@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
-import { getBills, filterBills, deleteBill } from '../../actions'
+import { getBills, filterBills, deleteBill, selectBill } from '../../actions'
 
 // TODO: New bill created should be added to list in order of date
 
@@ -25,6 +25,8 @@ class BillList extends React.Component {
   }
 
   handleDelete = id => this.props.deleteBill(id)
+
+  handleEdit = id => this.props.selectBill(id)
 
   render() {
     let total = 0
@@ -64,7 +66,7 @@ class BillList extends React.Component {
                       <p>{format(bill.dueDate, 'dddd MMM Do YYYY')}</p>
                     </div>
                     <div className="media-right">
-                      <Link className="button is-info" to={`/bills/edit/${bill._id}`}>Edit</Link>
+                      <Link className="button is-info" onClick={this.handleEdit.bind(this, bill._id)} to={`/bills/edit/${bill._id}`}>Edit</Link>
                     </div>
                     <div className="media-right">
                       <button className="button is-danger" onClick={this.handleDelete.bind(this, bill._id)}>Delete</button>
@@ -83,11 +85,11 @@ class BillList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    bills: Object.values(state.bills)
+    bills: Object.values(state.bills.bills)
   }
 }
 
 export default connect(
   mapStateToProps,
-  { getBills, filterBills, deleteBill }
+  { getBills, filterBills, deleteBill, selectBill }
 )(BillList)
