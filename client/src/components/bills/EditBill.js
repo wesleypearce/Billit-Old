@@ -42,7 +42,7 @@ class EditBill extends React.Component {
             <Field name="cost" component={this.renderInput} label="Bill cost" type="number" />
             <Field name="dueDate" component={this.renderInput} label="Bill due date" type="date" />
             <div className="control">
-              <button className="button is-primary">Submit</button>
+              <button className="button is-success">Submit</button>
             </div>
           </div>
         </form>
