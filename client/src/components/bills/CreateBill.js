@@ -31,13 +31,14 @@ class CreateBill extends React.Component {
   render() {
     return (
       <div className="block">
+        <h1 className="title">Create a Bill</h1>
         <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <div className="field">
             <Field name="name" component={this.renderInput} label="Bill name" type="text" />
             <Field name="cost" component={this.renderInput} label="Bill cost" type="number" />
             <Field name="dueDate" component={this.renderInput} label="Bill due date" type="date" />
             <div className="control">
-              <button className="button is-primary">Submit</button>
+              <button className="button is-success">Submit</button>
             </div>
           </div>
         </form>
