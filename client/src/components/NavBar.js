@@ -11,7 +11,7 @@ class NavBar extends React.Component {
 
         <div className="navbar-end">
           <div className="navbar-item">
-            <button className="button is-secondary">Log In</button>
+            <Link className="button is-success is-inverted has-text-black" to="/bills/new">Create a Bill</Link>
           </div>
         </div>
     </div>

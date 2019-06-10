@@ -31,6 +31,7 @@ class CreateBill extends React.Component {
   render() {
     return (
       <div className="block">
+        <h1 className="title">Create a Bill</h1>
         <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <div className="field">
             <Field name="name" component={this.renderInput} label="Bill name" type="text" />
